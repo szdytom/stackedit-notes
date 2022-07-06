@@ -80,6 +80,34 @@
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p>数据生成：</p>
+<pre class=" language-wls"><code class="prism  language-wls">#!/usr/bin/env wolframscript
+(* ::Package:: *)
+
+nearRandom[n_Integer] := RandomInteger[{IntegerPart[0.9 * n], n}];
+mkTree[n_Integer] := {#, RandomInteger[{1, # - 1}]} &amp; /@ Range[2, n];
+mkForest[n_Integer, m_Integer] := Take[RandomSample@mkTree[n], m];
+
+
+datacount = {10, 10, 10, 15, 30, 70, 5};
+
+SetDirectory[NotebookDirectory[]];
+
+prg = 0;
+PrintTemporary[ProgressIndicator[Dynamic[prg / Plus@@datacount]]];
+
+Do[
+Do[
+
+	n = nearRandom[({5, 10, 100, 1000, 100000, 200000, 15})[[i]]];
+	output = {n, RandomSample[Range[1,n], n]};
+
+WriteString[TemplateApply["data/data.``.``.in", {i, j}], StringJoin @@ Riffle[ToString /@ Flatten[output], " "]];
+prg = prg + 1;
+PrintTemporary[i, "-", j]
+, {j, datacount[[i]]}]
+, {i, Length[datacount]}];
+</code></pre>
 
     </div>
   </div>
