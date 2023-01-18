@@ -447,8 +447,8 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 <tr>
 <td align="center">根复合标签</td>
 <td align="center"><code>{tag}</code>，其中 <em>tag</em> 是复合标签内容，可以为空。</td>
-<td align="center">只有在开始标签匹配给定的复合标签（若有）则选择开始标签。只能应用于路径中的第一个元素。</td>
-<td align="center">开始标签，或者匹配失败时无</td>
+<td align="center">只有在根标签匹配给定的复合标签（若有）则选择根标签。只能应用于路径中的第一个元素。</td>
+<td align="center">根标签，或者匹配失败时无</td>
 <td align="center"><code>{Invisible:1b}</code></td>
 <td align="center">如果其子标签 <code>Invisible</code> 的值为 <code>1b</code> 则选择根标签。</td>
 </tr>
@@ -495,7 +495,7 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 <tr>
 <td align="center">命名列表标签的子列表（或数组）的元素</td>
 <td align="center"><code>name[index或空][index或空][index或空]...[index或tag或空]</code>，其中 <em>name</em> 可以是直接的或转义的字符串，<em>index</em> 是整数，<em>tag</em> 是复合标签内容且可以为空。</td>
-<td align="center">选择上个标签中命名为_name_的列表中的子元素的子元素。</td>
+<td align="center">选择上个标签中命名为 <em>name</em> 的列表中的子元素的子元素。</td>
 <td align="center">标签集合；其中元素个数可能超过上个标签集合，可能为空。</td>
 <td align="center"><code>foo[][2][{}]</code></td>
 <td align="center">选择 <code>foo</code> 标签中子列表的第三个中的是复合标签的所有元素。</td>
