@@ -57,7 +57,7 @@
 <td>512MiB</td>
 </tr>
 <tr>
-<td>特殊评判</td>
+<td>自定义校验器</td>
 <td>有</td>
 <td>有</td>
 <td>有</td>
@@ -65,8 +65,8 @@
 <tr>
 <td>捆绑测试</td>
 <td>无</td>
-<td>无</td>
-<td>无</td>
+<td>有</td>
+<td>有</td>
 </tr>
 </tbody>
 </table><h1 id="挑战nbt-nbt"><span class="prefix"></span><span class="content">挑战NBT (nbt)</span><span class="suffix"></span></h1>
@@ -75,7 +75,7 @@
 </blockquote>
 <h2 id="背景信息"><span class="prefix"></span><span class="content">背景信息</span><span class="suffix"></span></h2>
 <p>下面介绍的是 <strong>SNBT</strong> 格式（<strong>字符串化的二进制命名标签</strong>，<strong>S</strong>tringified <strong>N</strong>amed <strong>B</strong>inary <strong>T</strong>ags），SNBT 格式的数据在本题中简称为 SNBT 数据。</p>
-<p>SNBT格式是通过一个个<strong>标签</strong>来储存和读取数据的。一个标签由<strong>标签名称</strong>和<strong>数值</strong>两部分组成，两者用冒号 <code>:</code> 隔开。例如 <code>foo:1</code> 就是一个标签。</p>
+<p>SNBT 格式是通过一个个<strong>标签</strong>来储存和读取数据的。一个标签由<strong>标签名称</strong>和<strong>数值</strong>两部分组成，两者用冒号 <code>:</code> 隔开。例如 <code>foo:1</code> 就是一个标签。</p>
 <p>标签名两边称应该使用双引号包裹，内部可以填写字母、中文、空格或特殊符号等任意字符，也支持字符串转义。例如 <code>"foo bar"</code> 或 <code>"\"A cool name!!"</code> 都是合法的标签名。</p>
 <p>标签名称如果仅出现字母 <code>a-z</code>,<code>A-Z</code>、数字 <code>0-9</code> 和下划线 <code>_</code>，而不出现空格、中文或是特殊符号，则其两边的双引号可以省略。标签名对大小写敏感，例如，<code>Tag:1</code>、<code>tag:1</code> 和 <code>TAG:1</code> 是三个不同的标签。<code>a_Tag_name</code> 是一个可以省略双引号的标签名称，而 <code>a tag name</code> 或 <code>tag&amp;com</code> 则不是。</p>
 <p>一串标签应该被包裹在一对花括号 <code>{}</code> 中，并用逗号 <code>,</code> 分隔，才能被称之为 SNBT 数据。例如 <code>{foo:1,bar:2}</code>就是一串 SNBT 数据。</p>
@@ -447,7 +447,7 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 <tr>
 <td align="center">根复合标签</td>
 <td align="center"><code>{tag}</code>，其中 <em>tag</em> 是复合标签内容，可以为空。</td>
-<td align="center">只有在根标签匹配给定的复合标签（若有）则选择根标签。只能应用于路径中的第一个元素。</td>
+<td align="center">只有在根标签匹配给定的复合标签（若有）则选择根标签。只能是路径的第一个节点。</td>
 <td align="center">根标签，或者匹配失败时无</td>
 <td align="center"><code>{Invisible:1b}</code></td>
 <td align="center">如果其子标签 <code>Invisible</code> 的值为 <code>1b</code> 则选择根标签。</td>
@@ -594,7 +594,7 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 </ul>
 <p>并且将这些文件添加到一个 <code>zip</code> 格式的压缩文件中提交。</p>
 <h2 id="评分方式"><span class="prefix"></span><span class="content">评分方式</span><span class="suffix"></span></h2>
-<p>本题有特殊评判程序（SPJ），如果你输出的 NBT 和 SNBT 数据或值均和答案的数据或值等价，则被认为是正确答案。</p>
+<p>本题采用自定义校验器评测，如果你输出的 NBT 和 SNBT 数据或值均和答案的数据或值等价，则被认为是正确答案。</p>
 <p>具体而言，这包含几个方面：</p>
 <ul>
 <li>标签顺序：标签可以按照任意顺序给出，例如 <code>{a:1,b:2}</code> 和 <code>{b:2,a:1}</code> 等价；</li>
@@ -769,6 +769,7 @@ bd09 0001 7705 0000 0003 3f80 0000 4000
 <h2 id="输入格式-1"><span class="prefix"></span><span class="content">输入格式</span><span class="suffix"></span></h2>
 <p>一行一个整数 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span>，表示人数。</p>
 <h2 id="输出格式-1"><span class="prefix"></span><span class="content">输出格式</span><span class="suffix"></span></h2>
+<p>本题采用自定义校验器评测。</p>
 <p>首先一行一个整数，表示需要进行的场数 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span>。</p>
 <p>随后是 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> 行，每行首先是两个整数 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal">b</span></span></span></span></span>，表示该场比赛中两支队伍分为有多少人，随后输出 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span> 整数表示第一队成员的编号（从 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">1</span></span></span></span></span> 到 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span>），以及 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span> 整数表示第二队成员的编号。</p>
 <h2 id="样例-1"><span class="prefix"></span><span class="content">样例</span><span class="suffix"></span></h2>
@@ -781,14 +782,23 @@ bd09 0001 7705 0000 0003 3f80 0000 4000
 1 1 2 3
 </code></pre>
 <h2 id="评分方式-1"><span class="prefix"></span><span class="content">评分方式</span><span class="suffix"></span></h2>
-<p>如果你输出的场数 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> 正确，但是方案错误，可以得到该组数据的 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">40\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8056em; vertical-align: -0.0556em;"></span><span class="mord">40%</span></span></span></span></span> 的分数。</p>
+<p>如果你输出的场数 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> 正确，但是方案错误，可以得到该组数据的 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">40\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8056em; vertical-align: -0.0556em;"></span><span class="mord">40%</span></span></span></span></span> 的分数。注意方案的格式必须正确才能得到这些分数。这意味着你可以输出 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> 行 <code>0 0</code>。</p>
+<h2 id="自定义评判器"><span class="prefix"></span><span class="content">自定义评判器</span><span class="suffix"></span></h2>
+<p>为了方便选手测试，在下发文件中提供了 <code>checker.cpp</code> 文件，选手可以编译该程序，并使用它校验自己的输出文件。但请注意它与最终评测时所使用的校验器可能并不完全一致。你也不需要关心其代码的具体内容。编译命令为：</p>
+<pre><code>g++ checker.cpp −o checker -std=c++11
+</code></pre>
+<p><code>checker</code> 的使用方式为：</p>
+<pre><code>checker &lt;inputfile&gt; &lt;programsource&gt; &lt;outputfile&gt;
+</code></pre>
+<p>参数依次表示输入文件、你的源代码和你的输出文件。</p>
+<p>若你输出的数字大小范围不合法，则校验器会给出相应提示。若你的输出数字大小范围正确，但方案错误，则校验器会给出简要的错误信息。</p>
 <h1 id="天涯共此石-compass"><span class="prefix"></span><span class="content">天涯共此石 (compass)</span><span class="suffix"></span></h1>
 <blockquote>
 <p>下次你启程跨越下界的时候，记得在传送门旁边放个磁石并绑定指南针，这样之后就可以找到回家的路了。</p>
 </blockquote>
 <h2 id="题目描述-2"><span class="prefix"></span><span class="content">题目描述</span><span class="suffix"></span></h2>
 <p><strong>这是一道交互题</strong>。</p>
-<p>你本来是要去下界堡垒参加猪灵的黄金派对的，但很不幸的是，你迷路了。你现在既不知道自己在哪，也不自己要去的下界堡垒在哪。</p>
+<p>你本来是要去下界堡垒参加猪灵的黄金派对的，但很不幸的是，你迷路了。你现在既不知道自己在哪，也不知道自己要去的下界堡垒在哪。</p>
 <p>下界的地形构成了一棵由 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> 个点组成的树（树上的点编号为 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">1</span></span></span></span></span> 到 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span>）的结构，你现在的位置在点 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span>，你想去的地方为点 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span>。你已经知道了树的结构，但是不知道 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal">b</span></span></span></span></span> 的值。好消息是，你的猪灵朋友将会帮助你找出它们。</p>
 <p>首先，你的猪灵朋友会告诉你 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal">b</span></span></span></span></span> 之间的路径上的一个点 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span></span>。然后你可以进行若干次操作，具体而言，你可以要求他把磁石移动到点 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span></span>，然后你通过观察指南针，就可以知道</p>
 <ul>
