@@ -322,7 +322,7 @@
 <td align="center">非法，标签名必须使用双引号</td>
 </tr>
 </tbody>
-</table><p>虽然只有花括号包裹着的标签才被称为 SNBT 数据，但是广义上说，任何可以存储在 SNBT 中的值都可以被称为 SNBT 值，例如 <code>3b</code>，<code>2.3f</code> 或 <code>[1,2,3,4]</code>。</p>
+</table><p>虽然只有花括号包裹着的标签才被称为 SNBT 数据，但是广义上说，任何可以存储在 SNBT 中的值都可以被称为 <strong>SNBT 值</strong>，例如 <code>3b</code>，<code>2.3f</code> 或 <code>[1,2,3,4]</code>。</p>
 <hr>
 <p>下面介绍的是 <strong>NBT</strong> 格式（<strong>二进制命名标签</strong>，<strong>N</strong>amed <strong>B</strong>inary <strong>T</strong>ags）。它是 SNBT 的二进制化格式。NBT 格式以树形结构并配以许多标签的形式存储数据。所有的标签都有一个独立的类型和名称。</p>
 <p>每个标签在数据树中都是独立的一部分。标签的第一个字节为标签类型（ID），后两个字节是名称的长度（以两个字节的大端序无符号整数记录），最后是 UTF-8 格式字符串存储的标签名称（注：TAG_End 类型没有名称，不包含第二部分的两个字节，故名称被定义为空）。根据标签类型的不同，名称部分后的部分就是标签的负载。</p>
@@ -446,7 +446,7 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 <tbody>
 <tr>
 <td align="center">根复合标签</td>
-<td align="center"><code>{tag}</code>，其中 <em>tag</em> 是复合NBT内容，可以为空。</td>
+<td align="center"><code>{tag}</code>，其中 <em>tag</em> 是复合标签内容，可以为空。</td>
 <td align="center">只有在开始标签匹配给定的复合标签（若有）则选择开始标签。只能应用于路径中的第一个元素。</td>
 <td align="center">开始标签，或者匹配失败时无</td>
 <td align="center"><code>{Invisible:1b}</code></td>
@@ -471,10 +471,10 @@ bda0 e5a5 bd09 0001 7705 0000 0003 3f80
 <tr>
 <td align="center">命名列表或数组标签的元素</td>
 <td align="center"><code>name[index]</code>，其中 <em>name</em> 可以是直接的或转义的字符串，<em>index</em> 是整数。</td>
-<td align="center">选择上个标签中命名为 <em>name</em> 的列表（或数组）中位于 <em>index</em> 处的值，从 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0</span></span></span></span></span> 开始编号（如果 <em>index</em> 是负数，则是位于 <code>(列表长度+_index_)</code> 处）的元素。</td>
+<td align="center">选择上个标签中命名为 <em>name</em> 的列表中位于 <em>index</em> 处的值，从 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0</span></span></span></span></span> 开始编号（如果 <em>index</em> 是负数，则是位于 <code>(列表长度+index)</code> 处）的元素。</td>
 <td align="center">标签集合；其中元素个数不超过上个标签集合。可能为空。</td>
 <td align="center"><code>Pos[0]</code></td>
-<td align="center">选择Pos子列表（或数组）中的第一个子标签。</td>
+<td align="center">选择 <code>Pos</code> 子列表中的第一个子标签。</td>
 </tr>
 <tr>
 <td align="center">命名列表或数组标签的所有元素</td>
