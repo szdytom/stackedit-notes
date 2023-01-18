@@ -188,27 +188,27 @@
 </thead>
 <tbody>
 <tr>
-<td align="center"><code>.23</code></td>
+<td align="center"><code>.23f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.23</mn></mrow><annotation encoding="application/x-tex">0.23</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0.23</span></span></span></span></span></td>
 </tr>
 <tr>
-<td align="center"><code>12.</code></td>
+<td align="center"><code>12.f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>12</mn></mrow><annotation encoding="application/x-tex">12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">12</span></span></span></span></span></td>
 </tr>
 <tr>
-<td align="center"><code>+6.7</code></td>
+<td align="center"><code>+6.7f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6.7</mn></mrow><annotation encoding="application/x-tex">6.7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">6.7</span></span></span></span></span></td>
 </tr>
 <tr>
-<td align="center"><code>1.431e3</code></td>
+<td align="center"><code>1.431e3f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1431</mn></mrow><annotation encoding="application/x-tex">1431</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">1431</span></span></span></span></span></td>
 </tr>
 <tr>
-<td align="center"><code>1.431E+3</code></td>
+<td align="center"><code>1.431E+3f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1431</mn></mrow><annotation encoding="application/x-tex">1431</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">1431</span></span></span></span></span></td>
 </tr>
 <tr>
-<td align="center"><code>53432e-7</code></td>
+<td align="center"><code>53432e-7f</code></td>
 <td align="center"><span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.0053432</mn></mrow><annotation encoding="application/x-tex">0.0053432</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0.0053432</span></span></span></span></span></td>
 </tr>
 </tbody>
@@ -324,7 +324,7 @@
 </tbody>
 </table><p>虽然只有花括号包裹着的标签才被称为 SNBT 数据，但是广义上说，任何可以存储在 SNBT 中的值都可以被称为 SNBT 值，例如 <code>3b</code>，<code>2.3f</code> 或 <code>[1,2,3,4]</code>。</p>
 <hr>
-<p>下面介绍的是 <strong>NBT</strong> 格式（<strong>二进制命名标签</strong>，<strong>N</strong>amed <strong>B</strong>inary <strong>T</strong>ags）。它是 SNBT 的二进制化格式。NBT 格式以树形结构并配以许多_标签_的形式存储数据。所有的标签都有一个独立的类型和名称。</p>
+<p>下面介绍的是 <strong>NBT</strong> 格式（<strong>二进制命名标签</strong>，<strong>N</strong>amed <strong>B</strong>inary <strong>T</strong>ags）。它是 SNBT 的二进制化格式。NBT 格式以树形结构并配以许多标签的形式存储数据。所有的标签都有一个独立的类型和名称。</p>
 <p>每个标签在数据树中都是独立的一部分。标签的第一个字节为标签类型（ID），后两个字节是名称的长度（以两个字节的大端序无符号整数记录），最后是 UTF-8 格式字符串存储的标签名称（注：TAG_End 类型没有名称，不包含第二部分的两个字节，故名称被定义为空）。根据标签类型的不同，名称部分后的部分就是标签的负载。</p>
 
 <table>
