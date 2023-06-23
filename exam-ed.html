@@ -56,9 +56,9 @@ function mkid() {
 		group = 0;
 		ct = 0;
 	}
-	localStorage.setItem("group", group);
-	localStorage.setItem("ct", ct);
-	localStorage.setItem("gadder", gadder);
+	localStorage.setItem(`${name}group`, group);
+	localStorage.setItem(`${name}ct`, ct);
+	localStorage.setItem(`${name}gadder`, gadder);
 	return group * groupsz + ct;
 }
 
@@ -173,7 +173,7 @@ var data = [["circumstance","环境；境遇"],
 ["bring back","归还"],
 ["pursue one’s dream","追求自己的梦想"],
 ["carry on","继续；抱怨某事"],
-["acknowledge","承认"],
+["acknowledge","承认(有时指不情愿地)"],
 ["postpone","推迟"],
 ["maintain","维持"],
 ["occur","发生"],
