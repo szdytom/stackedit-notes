@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>英语期末考单词复习</title>
+</head>
+
+<body>
+<main>
+<p>Score: <span id=score>0</span></p>
+<h2 id="problem"></h2>
+<div id=inputs>
+<input type=text id=output onkeydown="keyup_submit(event);" /><button id=commit onclick="commit_callback()"><div style="width:100px">确认</div></button>
+</div>
+<p id=answer></p>
+</main>
+</body>
+
+<script type="text/javascript">
+
+var gadder = 1;
+var groupsz = 15;
+var score = 0, adder = 1, cur = null, group = 0, ct = -1;
+
+function render(pid) {
+	reset_status();
+	adder = 1;
+	document.getElementById('problem').innerHTML = data[pid][1];
+	cur = pid;
+}
+
+const name = 'ED-';
+
+function reset_data() {
+	localStorage.removeItem(`${name}ct`);
+	localStorage.removeItem(`${name}group`);
+	localStorage.removeItem(`${name}gadder`);
+}
+
+function mkid() {
+	// return Math.floor(Math.random() * data.length);
+	if (ct == -1) {
+		ct = parseInt(localStorage.getItem(`${name}ct`) || 0);
+		group = parseInt(localStorage.getItem(`${name}group`) || 0);
+		gadder = parseInt(localStorage.getItem(`${name}gadder`) || 1);
+		return group * groupsz + ct;
+	}
+	ct += 1;
+	if (ct >= groupsz) {
+		ct = 0;
+		group += gadder;
+		gadder = 1;
+	}
+	if (group * groupsz + ct >= data.length) {
+		group = 0;
+		ct = 0;
+	}
+	localStorage.setItem("group", group);
+	localStorage.setItem("ct", ct);
+	localStorage.setItem("gadder", gadder);
+	return group * groupsz + ct;
+}
+
+function keyup_submit(e){ 
+	var evt = window.event || e; 
+	if (evt.keyCode == 13){
+		commit_callback();
+	}
+}
+
+function commit_callback() {
+	if (!nexting) {
+		check_answer();
+	}
+}
+
+function reset_status() {
+	nexting = false;
+	document.getElementById('output').style.backgroundColor = "";
+	document.getElementById('output').value = "";
+}
+
+function string_mask(a) {
+return a.replaceAll(/\[[^\]*]\]/g, "").replaceAll(/\([^\)]*\)/g, "").toLowerCase().split("").filter(x => 'a' <= x && x <= 'z').toString();
+}
+
+function check_eq(a, b) {
+	return string_mask(a) == string_mask(b);
+}
+
+function check_answer() {
+	var a = document.getElementById('output').value;
+	if (check_eq(a, data[cur][0])) {
+		score += adder;
+		document.getElementById('score').innerHTML = score;
+		document.getElementById('output').style.backgroundColor = "green";
+		nexting = true;
+		setTimeout(() => render(mkid()), adder * 500);
+	} else {
+		adder = 0;
+		gadder = 0;
+		localStorage.setItem("gadder", gadder);
+		document.getElementById('output').value = data[cur][0];
+		document.getElementById('output').style.backgroundColor = "red";
+	}
+}
+
+setTimeout(() => render(mkid()), 300);
+
+</script>
+
+<style type="text/css">
+
+#output {
+			color: white;
+			font-size: xx-large;
+			background-color: dimgrey;
+			border: 0;
+			border-radius: 3px;
+			height: 100%;
+		}
+
+
+		#commit {
+			height: 100%;
+			background-color: green;
+			border: 0;
+			border-radius: 3px;
+			margin-top: 0;
+			margin-left: 10px;
+			color: white;
+			cursor: pointer;
+		}
+
+		#output {
+			box-sizing: border-box;
+		}
+
+		#inputs {
+display:flex;
+			width: 100%;
+			height: 46px;
+		}
+
+		#commit {
+			font-size: x-large;
+
+		}
+
+		body {
+			background-color: black;
+			color: white;
+		}
+
+		main {
+			margin: 0 auto;
+			width: 500px;
+		}
+</style>
+
+<script>
+var data = [["circumstance","环境；境遇"],
+["hesitate","犹豫"],
+["be willing to do sth.","愿意做某事"],
+["bring about","实现"],
+["desire","渴望"],
+["take up","开始从事"],
+["admit","承认"],
+["escape","逃脱"],
+["take out","带...出去；"],
+["insist on","坚持"],
+["bring back","归还"],
+["pursue one’s dream","追求自己的梦想"],
+["carry on","继续；抱怨某事"],
+["acknowledge","承认"],
+["postpone","推迟"],
+["maintain","维持"],
+["occur","发生"],
+["in case","以防万一"],
+["be determined to","下定决心"],
+["in return","作为回报"],
+["distinct","灭绝"],
+["settle","定居"],
+["intention","意图"],
+["bring along","把...一起带来"],
+["intelligent","聪明的"],
+["conclude","得出结论"],
+["sufficient","充足的"],
+["take away","带走、拿走"],
+["otherwise","否则"],
+["remarkable","卓越"],
+["spot","点；现场"],
+["figure out","弄清楚"],
+["bring in","引来，引进，介绍，收入"],
+["bring...forward","提出；提前"],
+["resource","资源"],
+["insist","坚持"],
+["carry over","把某事或某物移到另一时间、另一地点"],
+["head to","前往"],
+["as though","好像"],
+["vital","必不可少的"],
+["earn a living","谋生"],
+["regular","常规的"],
+["definitely","确实"],
+["realize one's dream","实现梦想"],
+["procedure","过程"],
+["bring on","引起"],
+["take off","起飞；脱下"],
+["pursue","追求"],
+["be about to do sth.","将要做某事"],
+["astronaut","宇航员"],
+["carry around","随身携带"],
+["bring up","抚养"],
+["judge","判断"],
+["bring...out","发表，拿出"],
+["defeat","打败"],
+["run out","用完"],
+["manner","方式"],
+["eventually","最终"],
+["bring with","带来；拿来；取来"],
+["a series of","一系类"],
+["enable sb. to do sth.","使某人能够做某事"],
+["seek","寻找"],
+["disappointed","失望的"],
+["(at) first hand","第一手资料"],
+["result in","导致"],
+["by accident","意外地"],
+["encounter","遇到"],
+["lack","缺少"],
+["(be) dressed in","穿着"],
+["passion","热情"],
+["indicate","表面"],
+["out of a strong passion for sth","出于对某事的强烈热情"],
+["apologize","道歉"],
+["consequence","结果"],
+["sum up","总结"],
+["apparently","显然"],
+["claim","宣称"],
+["carry out","执行"],
+["extraordinary","非凡的"],
+["patience","耐心"],
+["current","当前"],
+["to some extent","在某种程度上"],
+["as a matter of fact","事实上"],
+["to name but a few","这仅仅列举的是一小部分"],
+["apart from","除了"],
+["come to power","上台；掌权"],
+["argue","争论"],
+["determine","决定"],
+["on board","在船上"],
+["permit","允许"],
+["by chance","偶然"],
+["commit oneself to sth","致力于某事"],
+["take on","呈现、显出"],
+["ignore","忽略"],
+["take back","退回、退还、归还；收回"],
+["obtain","获得"],
+["on the basis of","在...的基础上"],
+["in the hope of doing","希望从事某事"]];
+</script>
+
+</html>
