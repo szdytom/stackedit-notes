@@ -100,7 +100,7 @@ function check_answer() {
 	} else {
 		adder = 0;
 		gadder = 0;
-		localStorage.setItem("gadder", gadder);
+		localStorage.setItem(`${name}gadder`, gadder);
 		document.getElementById('output').value = data[cur][0];
 		document.getElementById('output').style.backgroundColor = "red";
 	}
