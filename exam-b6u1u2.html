@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>英语月考单词复习</title>
+</head>
+
+<body>
+<main>
+<p>Score: <span id=score>0</span></p>
+<h2 id="problem"></h2>
+<div id=inputs>
+<input type=text id=output onkeydown="keyup_submit(event);"/><button id=commit onclick="commit_callback()"><div style="width:100px">确认</div></button>
+</div>
+<p id=answer></p>
+</main>
+</body>
+
+<script type="text/javascript">
+
+var gadder = 1;
+var groupsz = 15;
+var score = 0, adder = 1, cur = null, group = 0, ct = -1;
+
+function render(pid) {
+	reset_status();
+	adder = 1;
+	document.getElementById('problem').innerHTML = data[pid][1];
+	cur = pid;
+}
+
+const name = 'ED-';
+
+function reset_data() {
+	localStorage.removeItem(`${name}ct`);
+	localStorage.removeItem(`${name}group`);
+	localStorage.removeItem(`${name}gadder`);
+}
+
+function mkid() {
+	// return Math.floor(Math.random() * data.length);
+	if (ct == -1) {
+		ct = parseInt(localStorage.getItem(`${name}ct`) || 0);
+		group = parseInt(localStorage.getItem(`${name}group`) || 0);
+		gadder = parseInt(localStorage.getItem(`${name}gadder`) || 1);
+		return group * groupsz + ct;
+	}
+	ct += 1;
+	if (ct >= groupsz) {
+		ct = 0;
+		group += gadder;
+		gadder = 1;
+	}
+	if (group * groupsz + ct >= data.length) {
+		group = 0;
+		ct = 0;
+	}
+	localStorage.setItem(`${name}group`, group);
+	localStorage.setItem(`${name}ct`, ct);
+	localStorage.setItem(`${name}gadder`, gadder);
+	return group * groupsz + ct;
+}
+
+function keyup_submit(e){ 
+	var evt = window.event || e; 
+	if (evt.keyCode == 13){
+		commit_callback();
+	}
+}
+
+function commit_callback() {
+	if (!nexting) {
+		check_answer();
+	}
+}
+
+function reset_status() {
+	nexting = false;
+	document.getElementById('output').style.backgroundColor = "";
+	document.getElementById('output').value = "";
+}
+
+function string_mask(a) {
+return a.replaceAll(/\[[^\]*]\]/g, "").replaceAll(/\([^\)]*\)/g, "").toLowerCase().split("").filter(x => 'a' <= x && x <= 'z').toString();
+}
+
+function check_eq(a, b) {
+	return string_mask(a) == string_mask(b);
+}
+
+function check_answer() {
+	var a = document.getElementById('output').value;
+	if (check_eq(a, data[cur][0])) {
+		score += adder;
+		document.getElementById('score').innerHTML = score;
+		document.getElementById('output').style.backgroundColor = "green";
+		nexting = true;
+		setTimeout(() => render(mkid()), adder * 500);
+	} else {
+		adder = 0;
+		gadder = 0;
+		localStorage.setItem(`${name}gadder`, gadder);
+		document.getElementById('output').value = data[cur][0];
+		document.getElementById('output').style.backgroundColor = "red";
+	}
+}
+
+setTimeout(() => render(mkid()), 300);
+
+</script>
+
+<style type="text/css">
+	#problem, button, p {
+		font-family: sans-serif;
+	}
+
+		#output {
+			color: white;
+			font-size: 21px;
+			background-color: dimgrey;
+			border: 0;
+			border-radius: 3px;
+			height: 100%;
+			width: 400px;
+			font-family: monospace;
+		}
+
+
+		#commit {
+			height: 100%;
+			background-color: green;
+			border: 0;
+			border-radius: 3px;
+			margin-top: 0;
+			margin-left: 10px;
+			color: white;
+			cursor: pointer;
+		}
+
+		#output {
+			box-sizing: border-box;
+		}
+
+		#inputs {
+			display:flex;
+			width: 100%;
+			height: 46px;
+		}
+
+		#commit {
+			font-size: x-large;
+		}
+
+		body {
+			background-color: black;
+			color: white;
+		}
+
+		main {
+			margin: 0 auto;
+			width: 500px;
+		}
+</style>
+
+<script>
+var data = [["subsequent",	"adj．随后的；后来的；之后的"],
+["influential",	"adj．有很大影响力的；有支配力的"],
+["emerge",	"vi.&vl．出现；浮现；暴露"],
+["civil",	"adj．国民的；民用的；民事的"],
+["recognition",	"n．承认；认出；赞誉"],
+["bride",	"n. 新娘"],
+["representative",	"adj．典型的；有代表性的;n．代表"],
+["symphony",	"n．交响乐；交响曲"],
+["realist",	"n．现实主义画家（或作家等）；现实主义者"],
+["entry",	"n．加入；进入；参与"],
+["realistic",	"adj．现实的；逼真的"],
+["rank",	"n．地位；级别；行列;vt.&vi．把……分等级；使排成行"],
+["sculptor",	"n．雕刻家；雕塑家"],
+["dimension",	"n．维；规模；范围"],
+["arched",	"adj．拱形的；弓形的"],
+["pond",	"n. 池塘；水池"],
+["in particular",	"尤其；特别"],
+["visual",	"adj. 视觉的；视力的"],
+["primitive",	"adj．发展水平低的；原始的；远古的;n．文艺复兴前的艺术家（或作品）"],
+["bring ... to life",	"赋予……生命；使……鲜活起来"],
+["noble",	"n．贵族成员；出身高贵的人;adj．崇高的；宏伟的；高贵的"],
+["realism",	"n．逼真；现实主义；务实作风"],
+["fine art",	"美术（尤其绘画和雕塑）"],
+["expansion",	"n．扩张；扩展；扩大"],
+["humble",	"adj．谦逊的；虚心的；卑微的"],
+["be worthy of",	"值得"],
+["permanent",	"adj．永久的；永恒的；长久的"],
+["fond",	"adj．喜爱"],
+["arch",	"vt.&vi．呈弧形横跨；（使）成弓形;n．拱；拱形结构；拱门"],
+["guarantee",	"vt．保证；确保；肯定……必然发生；n．保证；保修单；担保物"],
+["criticism",	"n．批评；指责；评论"],
+["vase",	"n．花瓶；装饰瓶"],
+["investment",	"n．投资额；投资；（时间、精力的）投入"],
+["set apart from",	"使与众不同；使突出；使优于……"],
+["two-dimensional",	"adj．二维的"],
+["exhibition",	"n．展览；（技能、感情或行为的）表演"],
+["criticise",	"vi.&vt．批评；指责；评价"],
+["precise",	"adj. 准确的：精确的"],
+["be fond of",	"喜爱；喜欢"],
+["decline",	"n.（数量、价格、质量等的）减少；下降；衰落；vi.& vt. 减少；下降；衰落；谢绝"],
+["precisely",	"adv. 准确地；精确地；的确如此"],
+["reputation",	"n．名誉；名声"],
+["contemporary",	"adj．当代的；现代的；属同时期的；n．同代人；同辈人"],
+["sculpture",	"n．雕像；雕刻品；雕刻术"],
+["memorial",	"n．纪念碑（或像等）；纪念物；纪念品;adj．纪念的；悼念的"],
+["subjective",	"adj．主观的"],
+["purchase",	"vt．购买；采购;n．购买；购买的东西"],
+["worthy",	"adj．值得……的；有价值的"],
+["client",	"n．委托人；当事人；客户摄影"],
+["examine",	"vt.（仔细）检查；审查；测验"],
+["stressed out",	"焦虑不安；心力交瘁"],
+["specialist",	"n．专科医生；专家"],
+["refresh",	"vt．使恢复精力；使凉爽；刷新"],
+["reward",	"n．回报；奖励；报酬；vt．奖励；奖赏；给以报酬"],
+["dominate",	"vt.&vi．支配；控制；占有优势"],
+["enhance",	"vt. 提高；增强；增进"],
+["absorb",	"vt．吸引全部注意力；吸收"],
+["dentist",	"n. 牙科医生"],
+["dynamic",	"adj．充满活力的；精力充沛的；动态的"],
+["disturb",	"vt．打扰；搅乱；使烦恼"],
+["rely on",	"依赖；依靠；信赖"],
+["worn out",	"筋疲力尽的；疲惫的"],
+["cigarette",	"n. 香烟；卷烟"],
+["abuse",	"n. 滥用；虐待；辱骂；vt．滥用；虐待；辱骂（不同词性发音不同）"],
+["nut",	"n．坚果"],
+["pill",	"n．药丸；药片"],
+["surgery",	"n．外科手术；外科学"],
+["psychology",	"n．心理学；心理；心理影响"],
+["facilitate",	"vt．促进；促使；使便利"],
+["bowling",	"n．保龄球运动"],
+["decide on",	"决定；选定"],
+["surgeon",	"n．外科医生"],
+["delete",	"v．删去；删除"],
+["be composed of",	"由……组成（或构成）的"],
+["pessimistic",	"adj．悲观的；悲观主义的"],
+["comedy",	"n．喜剧；喜剧片；滑稽节目"],
+["shave off",	"剃掉；刮去"],
+["flu",	"n. 流感"],
+["drug",	"n. 毒品；药物"],
+["skateboard",	"n. 滑板；vi．滑滑板"],
+["consultant",	"n．顾问；高级顾问医师"],
+["negative",	"adj．消极的；有害的；否定的"],
+["skip",	"vt．跳过；不参加；悄悄溜走；i．蹦蹦跳跳地走；跳绳；n．蹦跳"],
+["dizzy",	"adj．头晕目眩的"],
+["tobacco",	"n．烟草；烟叶"],
+["shave",	"vi., vt. & n. 剃（须发）；刮脸"],
+["beard",	"n. 胡须；络腮胡子"],
+["discipline",	"n. 自制力；纪律；学科；vt．自我控制；管教；处罚"],
+["monthly",	"adv. & adj．每月；每月一次的；n．月刊"],
+["make up one's mind",	"下定决心"],
+["compose",	"vt.&vi．组成；作曲；撰写"],
+["straight away ",	"立即；马上"],
+["rely",	"vi. 依赖；依靠；信赖"],
+["alcohol",	"n. 酒；酒精"],
+["stimulate",	"vt．激发；促进；刺激"],
+["in response to",	"回答；答复"],
+["liberation",	"n. 解放；摆脱"]]
+</script>
+
+</html>
